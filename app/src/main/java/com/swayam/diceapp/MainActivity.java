@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
@@ -35,6 +36,11 @@ public class MainActivity extends AppCompatActivity{
         btnRoll.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //if already playing then stop and play
+                if (mp.isPlaying()) {
+                    mp.stop();
+                    try { mp.prepare(); } catch (IOException e) { }
+                }
                 mp.start();
                 Random random = new Random();
                 final int myRandomNumber1 = random.nextInt(6);
